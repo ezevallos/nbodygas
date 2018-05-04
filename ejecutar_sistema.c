@@ -17,14 +17,14 @@ MPI_Init(NULL,NULL);
 if(rank==0){
 	
 	
-	system("gcc UNIVERSO_DATOS_FRANCO.c -lm -o datos");
+	system("gcc UNIVERSO_DATOS_gas.c -lm -o datos");
 	system("./datos");
 	
 }
 
 else if(rank==1)
 {
-system("g++ UNIVERSO_GRAFICA_FRANCO.cpp -lGL -lGLU -lglut -lm -lfreeimage -o grafica");
+system("g++ UNIVERSO_GRAFICA_gas.cpp -lGL -lGLU -lglut -lm -lfreeimage -o grafica");
 do{
 arch_verificacion=fopen("1.dat","r+t");
 }while(arch_verificacion==NULL);

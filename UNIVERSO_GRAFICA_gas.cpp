@@ -11,13 +11,13 @@
 #include<string.h>
 #include<math.h>
 #define PI 3.141592654
-//#define N=1000;
+#define num_particulas 200
 /***************************************
       *     Inicializacion de variables     *
       ***************************************/
 
-      GLdouble pos[200][3];
-GLdouble rd[200];
+      GLdouble pos[num_particulas][3];
+GLdouble rd[num_particulas];
       GLdouble posx=0,posz=0;
 int num_arch=0;
      /*******************************************************
@@ -124,6 +124,51 @@ void ejes()
 
 }
 
+void arista_cubo()
+{
+       glColor3f(1,1,1);
+       glBegin(GL_LINES);
+            glVertex3f(-100,100,100);
+	glVertex3f(-100,100,-100);
+
+    glVertex3f(100,100,100);
+	glVertex3f(100,100,-100);
+          
+      glVertex3f(100,-100,100);
+	glVertex3f(100,-100,-100);
+
+    glVertex3f(-100,-100,100);
+	glVertex3f(-100,-100,-100);
+// aristas horixzontales !!!
+      glVertex3f(100,-100,100);
+	glVertex3f(-100,-100,100);
+//
+    glVertex3f(100,-100,-100);
+	glVertex3f(-100,-100,-100);
+//
+glVertex3f(100,-100,-100);
+	glVertex3f(100,100,-100);
+//
+
+    glVertex3f(100,100,-100);
+	glVertex3f(-100,100,-100);
+//
+glVertex3f(-100,-100,-100);
+	glVertex3f(-100,100,-100);
+//
+    glVertex3f(-100,-100,100);
+	glVertex3f(-100,100,100);
+//
+glVertex3f(100,100,100);
+	glVertex3f(-100,100,100);
+//
+    glVertex3f(100,-100,100);
+	glVertex3f(100,100,100);
+
+       glEnd();
+
+}
+
     /************************************
      *     CREACION DE LOS PLANETAS     *
      ************************************/
@@ -150,7 +195,7 @@ memset(name_arch,0,50);
 sprintf(name_arch,"%d.dat",num_arch);
 FILE* arch=fopen(name_arch,"r+t");
 int cont=0;
-for(cont=0;cont<200;cont++)
+for(cont=0;cont<num_particulas;cont++)
 {
 fscanf(arch,"%lf %lf %lf",&pos[cont][0],&pos[cont][1],&pos[cont][2]);
 }
@@ -176,11 +221,11 @@ mod = sqrt(dir[0]*dir[0] + dir[2]*dir[2]);
 
 
      iluminacion ();
-     ejes();
+ //    ejes();
+arista_cubo();
 int i;
-for(i=0;i<200;i++){
+for(i=0;i<num_particulas;i++){
  glPushMatrix();
-     //glRotatef(rot[i],0,1,0);
      glTranslatef(pos[i][0],pos[i][1],pos[i][2]); 
      astro(i);
      glPopMatrix();
@@ -277,15 +322,11 @@ int main (int argc, char *argv[])
 {
 int i;
 
-for(i=0;i<200;i++){
-//rd[i]=(double)(rand()%(4))+2.0;
+for(i=0;i<num_particulas;i++){
+
 rd[i]=(double)3.0;
 }
-/*for (i=0;i<10 ;i++){
-rot[i]=rand()%200;
-}
-for (i=0;i<100;i++)
-pos[i]=rand()%100;*/
+
 
     glutInit(&argc, argv);//inicializacion del glut
     glutInitWindowSize(800,800);//tamaño de la ventana
