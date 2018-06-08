@@ -11,7 +11,7 @@
 #include<string.h>
 #include<math.h>
 #define PI 3.141592654
-#define num_particulas 200
+#define num_particulas 20
 /***************************************
       *     Inicializacion de variables     *
       ***************************************/
@@ -169,10 +169,7 @@ glVertex3f(100,100,100);
 
 }
 
-    /************************************
-     *     CREACION DE LOS PLANETAS     *
-     ************************************/
-void astro(int i)
+void PARTICULA(int i)
 {
 glColor3f(i*0.005,i*0.0008,i*0.00014);
 glutSolidSphere(rd[i],60,60);
@@ -192,7 +189,7 @@ void display()
 //abriendo el archivo correspondiente!!
 char * name_arch=(char*)malloc(sizeof(char)*50);
 memset(name_arch,0,50);
-sprintf(name_arch,"%d.dat",num_arch);
+sprintf(name_arch,"%d.dat",num_arch*5);
 FILE* arch=fopen(name_arch,"r+t");
 int cont=0;
 for(cont=0;cont<num_particulas;cont++)
@@ -227,7 +224,7 @@ int i;
 for(i=0;i<num_particulas;i++){
  glPushMatrix();
      glTranslatef(pos[i][0],pos[i][1],pos[i][2]); 
-     astro(i);
+     PARTICULA(i);
      glPopMatrix();
 }
 
@@ -324,7 +321,7 @@ int i;
 
 for(i=0;i<num_particulas;i++){
 
-rd[i]=(double)3.0;
+rd[i]=(double)9.0;
 }
 
 
@@ -332,7 +329,7 @@ rd[i]=(double)3.0;
     glutInitWindowSize(800,800);//tamaño de la ventana
     glutInitWindowPosition(400,100);//posicion de la ventana en el monitor
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);//modo de visualizacion inicial
-    glutCreateWindow("BIG BANG : LA GRAN EXPLOSION");//nombre de la ventana
+    glutCreateWindow("GAS IDEAL");//nombre de la ventana
 	init();
     glClearColor(0,0,0,0);//especificar valores claros para el color del buffer
     glutReshapeFunc(resize);//control de ventanas
@@ -342,9 +339,6 @@ gluLookAt(1.0,1.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0);
 	glutSpecialFunc(Keyboard_2);  
 glutFullScreen();
     glutIdleFunc(idle);//funcion de animacion
-
-   // char soundfile[20] ="C:\planeta.wav";//sonido
-    //PlaySound((LPCSTR)soundfile, NULL, SND_FILENAME | SND_ASYNC );//sonido
 
     glutMainLoop();//bucle de procesamiento de eventos de GLUT
     return 0;
